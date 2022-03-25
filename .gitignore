@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Testing
+coverage
+
+# Package-lock
+package-lock.json
+yarn.lock
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
