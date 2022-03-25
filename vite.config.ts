@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
+import eslintPlugin from "@nabla/vite-plugin-eslint";
 import { babel } from '@rollup/plugin-babel';
 import svgr from '@svgr/rollup';
 
@@ -8,6 +9,7 @@ import svgr from '@svgr/rollup';
 export default defineConfig({
   plugins: [
     react(),
+    eslintPlugin(),
     svgr(),
     babel({
       babelHelpers: 'bundled'
