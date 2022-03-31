@@ -1,0 +1,32 @@
+include:
+  - local: '/ci-templates/rules-template.yml'
+  - local: '/ci-templates/basic-template.yml'
+
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "staging"
+
+variables:
+  APP_DIR: apps/checkout-headless-frontend
+  APP_NAME: checkout-headless-frontend
+
+stages:
+  - check
+  - build
+  - deploy
+
+deploy:
+  stage: deploy
+  image: registry.gitlab.com/cencosud-ds/cencommerce/utils/docker-images/node:14.3.0-alpine3.11
+  extends: 
+    - .approved-merge-request
+    - .tags-basic-rules
+  needs: [build]
+  dependencies:
+    - build
+  environment:
+    name: "${ENVIRONMENT}-${APP_NAME}"
+  script:
+    - echo "Deploy staging checkout-headless-frontend funcionando [$APP_NAME]!!"

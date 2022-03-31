@@ -3,7 +3,7 @@
   "description": "",
   "author": "Daniel Sarmiento (MaestroShifu)",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc && vite build",
@@ -17,6 +17,7 @@
     "format": "prettier --write \"src/**/*.(ts|tsx|js|jsx)\" \"test/**/*.(ts|tsx|js|jsx)\""
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -24,7 +25,6 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@nabla/vite-plugin-eslint": "^1.4.0",
     "@rollup/plugin-babel": "^5.3.1",
     "@svgr/rollup": "^6.2.1",
     "@testing-library/dom": "^8.11.4",
@@ -50,8 +50,10 @@
     "jest": "^27.5.1",
     "prettier": "^2.6.1",
     "react-test-renderer": "^17.0.2",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.5.4",
-    "vite": "^2.8.0"
+    "vite": "^2.8.0",
+    "vite-plugin-environment": "^1.1.0"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -64,8 +66,11 @@
     "rootDir": ".",
     "testRegex": ".*\\.spec\\.(ts|tsx)$",
     "transform": {
-      "^.+\\.(t|j)(s|sx)$": "babel-jest"
+      "^.+\\.(js|jsx|ts|tsx|mjs)$": "ts-jest"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(sucrase)/)"
+    ],
     "collectCoverageFrom": [
       "src/**/*.(t|j)(s|sx)"
     ],
